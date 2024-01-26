@@ -1,16 +1,66 @@
 ﻿@page "/products"
-@using Logistic.Data
-@inject ProductService productServive
+@using LogisticApp.Data
+@inject ProductService productService
+@using Microsoft.AspNetCore.Authorization
 
+@attribute [Authorize]
 <h3>Products</h3>
+
+<hr />
+
+<a class="btn btn-primary my-2" href="addProdukt">+ Produkt</a>
+
+
+@if (allProducts == null)
+{
+    <p>Loading.. </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    Id
+                </td>
+
+                <td>
+                    Produkt Name
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product product in allProducts)
+            {
+                <tr>
+                    <td>
+                        @product.ProductId
+                    </td>
+
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        <!-- <a class="btn btn-primary" href="EditProdukt/@product.ProductId">Edit </a> -->
+                        <a class="btn btn-danger" href="DeleteProdukt/@product.ProductId">Delete </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
 
 @code {
     List<Product> allProducts;
 
     protected override async Task OnInitializedAsync()
     {
-        return base.OnInitializedAsync()
-    }
+        await base.OnInitializedAsync();
 
+        allProducts = await productService.GetAllProducts();
+    }
 
 }

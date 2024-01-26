@@ -1,0 +1,41 @@
+﻿@page "/addProdukt"
+@rendermode InteractiveServer
+@using LogisticApp.Data
+@inject ProductService productService
+@inject NavigationManager navMan
+
+<h3>Produkt hinzufügen</h3>
+
+<form>
+    <div class="row my-2">
+        <div class="col col-md-2">
+            <label class="form-control-lg">Name</label>
+            <input class="form-control" @bind="@newProdukt.Name" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-2">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" @onclick="@CreateProduct">Save</button>
+                <button type="button" class="btn btn-danger" @onclick="@Cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@code {
+    Product newProdukt = new();
+
+    protected async void CreateProduct()
+    {
+        await productService.InsertProducts(newProdukt);
+
+        navMan.NavigateTo("Products");
+    }
+
+    void Cancel()
+    {
+        navMan.NavigateTo("Products");
+    }
+}
