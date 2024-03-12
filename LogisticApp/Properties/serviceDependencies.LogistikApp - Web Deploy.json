@@ -1,3 +1,12 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/LogistikApp/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDefaultConnection_3C6B53FE6B",
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/logisticappserver/databases/LogisticApp",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "dynamicId": null
+    }
+  }
 }

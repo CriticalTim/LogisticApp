@@ -18,12 +18,14 @@ namespace LogisticApp.Data
 
         public async Task<Product> GetProduct(int id)
         {
+            
             Product productFromDB = await _context.Products.SingleOrDefaultAsync(x => x.ProductId == id);
             return productFromDB;
         }
 
         public async Task<bool> InsertProducts(Product product)
         {
+            if(product ==null) return false;
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 
@@ -32,6 +34,7 @@ namespace LogisticApp.Data
 
         public async Task<bool> UpdateProducts(Product product)
         {
+            if (product == null) return false;
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
 
@@ -40,6 +43,7 @@ namespace LogisticApp.Data
 
         public async Task<bool> DeleteProducts(Product product)
         {
+            if (product == null) return false;
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
